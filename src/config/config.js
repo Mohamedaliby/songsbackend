@@ -1,7 +1,7 @@
 const config = {
     port:3000,
     db: {
-database: process.env.DB_NAME || 'tutorial',
+database: process.env.DATABASE_URL || 'tutorial',
 user: process.env.DB_USER || 'tutorial',
 password: process.env.DB_PASS || 'tutorial',
 options:{

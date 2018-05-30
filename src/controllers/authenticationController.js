@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 const sockets = require('./socketIo');
 const app = require('../app')
-const ioC = sockets.io
 
 var socketio = app.get('socketio')
 
@@ -17,16 +16,18 @@ function jwtSignUser(user) {
 }
 
 module.exports = {
-
     register(req, res) {
         console.log(req.body)
         const user = User.create(req.body)
             .then((user) => {
                 const userJson = user.toJSON()
-                userJson.password = undefined
+                let sentUser = {
+                    email: userJson.email,
+                    id: userJson.id
+                }
                 res.json({
-                    user: userJson,
-                    token: jwtSignUser(userJson)
+                    user: sentUser,
+                    token: jwtSignUser(sentUser)
                 })
 
             })
@@ -64,15 +65,15 @@ module.exports = {
                                 res.status(403).json(error)
                             } else {
                                 const userJson = user.toJSON()
-                                userJson.password = undefined
-
-                                // socket.emit('hello', {user:userJson})
+                                let sentUser = {
+                                    email: userJson.email,
+                                    id: userJson.id
+                                }
                                 res.json({
-                                    user: userJson,
-                                    token: jwtSignUser(userJson)
+                                    user: sentUser,
+                                    token: jwtSignUser(sentUser)
                                 })
-                                console.log(ioC)
-                                // socketio.sockets.emit('hello', {user: user.email}); 
+
                             }
                         })
                         .catch(err => {

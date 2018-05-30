@@ -8,6 +8,7 @@ const config = require('./config/config')
 var app = module.exports = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
+const jwt = require('jsonwebtoken')
 
 
 
@@ -25,11 +26,30 @@ app.use(express.static(path.join(__dirname, 'dist')))
 // socket.io code
 app.set('socketio', io)
 app.set('server', server)
-
 var socketio = app.get('socketio')
-
-socketio.on('connect',()=>{
-    console.log('connecting yo')
+socketio.use((socket, next) => {
+    let token = socket.handshake.query.token;
+    console.log(token)
+    // if is not working
+    if (token == null || typeof token == 'null') {
+        console.log('token is null yo')
+        return next(new Error('authentication error'));
+    }else{
+        try {
+            jwt.verify(token, 
+             config.authentication.jwtSecret)
+             console.log('verified yo')
+          } catch(err) {
+            console.log('no token yo')
+            // socket.disconnect();
+            // console.log(err)
+            return next(new Error('authentication error'));
+          }
+          return next();
+    }
+  })
+socketio.on('connect', (socket)=>{
+    require('./controllers/socketController')(socket)
 })
 
 require('./routes')(app)

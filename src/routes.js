@@ -1,5 +1,7 @@
 const AuthenticstionController = require('./controllers/authenticationController')
 const AuthenticstionControllerPolicy = require('./policies/AuthenticationControllerPolicy')
+const SongsController = require('./controllers/SongsController')
+const image = require('./controllers/image')
 var path = require('path')
 
 module.exports = (app) => {
@@ -12,4 +14,13 @@ app.post('/login',
 app.get('/', (req, res) => {
                         res.sendFile(path.join(__dirname, './dist', '/index.html'));
                 })
+app.get('/songs',
+                        SongsController.index)
+
+app.post('/songs',      image.memoryUpload,
+                        SongsController.post)
+                        
+app.get('/songs/:id',
+                        SongsController.show)
 }
+
