@@ -5,22 +5,21 @@ const image = require('./controllers/image')
 var path = require('path')
 
 module.exports = (app) => {
- app.post('/register',
-                        AuthenticstionControllerPolicy.register,
-                        AuthenticstionController.register),
-app.post('/login',
-                        AuthenticstionController.login),
+ app.post('/register', AuthenticstionControllerPolicy.register, AuthenticstionController.register)
+
+ app.post('/login', AuthenticstionController.login)
 
 app.get('/', (req, res) => {
-                        res.sendFile(path.join(__dirname, './dist', '/index.html'));
+                        res.sendFile(path.join(__dirname, './dist', '/index.html'))
                 })
-app.get('/songs',
-                        SongsController.index)
 
-app.post('/songs',      image.memoryUpload,
-                        SongsController.post)
+app.get('/songs', SongsController.index)
+
+app.post('/songs', image.memoryUpload, SongsController.post)
                         
-app.get('/songs/:id',
-                        SongsController.show)
+app.get('/songs/:id', SongsController.show)
+
+app.put('/songs/:id',   image.memoryUpload, SongsController.put)
+
 }
 

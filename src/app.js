@@ -20,6 +20,7 @@ const I = require('socket.io')(server);
 // middleware 
 app.use(morgan('combine'))
 app.use(parser.json())
+// app.use(parser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'dist')))
 
