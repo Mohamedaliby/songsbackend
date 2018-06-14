@@ -23,6 +23,8 @@ app.use(parser.json())
 // app.use(parser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'dist')))
+// app.use(express.static(path.join(__dirname, '/uploads')))
+app.use('/uploads', express.static(process.cwd() + '/uploads'))
 
 // socket.io code
 app.set('socketio', io)

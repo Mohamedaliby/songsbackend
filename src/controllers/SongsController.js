@@ -3,23 +3,42 @@ const {
 } = require('../models')
 
 module.exports = {
-    index (req, res) {
-        const songs = Song.findAll({
-                limit: 10
-            })
-            .then((songs) => {
-                res.json(songs)
-            })
-            .catch((err) => {
-                res.status(500).json({
-                    error: 'Sorry somthing is wrong.'
+   async index (req, res) {
+        try {
+            let songs = null
+            const search = req.query.search
+            if (search) {
+                songs = await Song.findAll({
+                    where: {
+                        $or:[
+                         'title', 'artist', 'genre', 'album'
+                        ].map(key=>({
+                           [key]:{
+                               $like:`%${search}%`
+                            }
+                        }))
+                    }
                 })
+            } else {
+                songs = await Song.findAll({
+                    limit: 30
+                })
+                console.log('got songs')
+            }
+            res.json(songs)
+            
+        } catch (error) {
+            res.status(500).json({
+                error: 'Sorry somthing is wrong.'
             })
-
+        }
     },
     post (req, res) {
-        console.log(req.file)
-        const song = Song.create(req.body)
+        const newSong = req.body
+              newSong.albumImage = `/uploads/${req.imageUrl}`
+        console.log(newSong.albumImage)
+        // console.log(req.file)
+        const song = Song.create(newSong)
             .then((song) => {
                 res.json(song)
             })
@@ -46,7 +65,9 @@ module.exports = {
         console.log(id)        
         console.log(req.body)
         console.log(req.file)
-        const song = Song.update(req.body, {
+        const newSong = req.body
+        newSong.albumImage = `/uploads/${req.imageUrl}`
+        const song = Song.update(newSong, {
             where: {
                 id: id
             }

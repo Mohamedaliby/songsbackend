@@ -1,6 +1,7 @@
 const AuthenticstionController = require('./controllers/authenticationController')
 const AuthenticstionControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const SongsController = require('./controllers/SongsController')
+const BookmarksController = require('./controllers/BookmarksController')
 const image = require('./controllers/image')
 var path = require('path')
 
@@ -15,11 +16,13 @@ app.get('/', (req, res) => {
 
 app.get('/songs', SongsController.index)
 
-app.post('/songs', image.memoryUpload, SongsController.post)
+app.post('/songs', image.upload, SongsController.post)
                         
 app.get('/songs/:id', SongsController.show)
 
-app.put('/songs/:id',   image.memoryUpload, SongsController.put)
+app.put('/songs/:id',   image.upload, SongsController.put)
 
+
+app.get('/bookmarks', BookmarksController.index)
 }
 
