@@ -81,4 +81,16 @@ module.exports = {
                 })
             })
     },
+    async delete (req, res) {
+        try {
+            const {id} = req.params
+            const song = await Song.findById(id)
+            await song.destroy()
+            res.json(song)
+        } catch (error) {
+            res.status(500).json({
+                error: 'Sorry somthing is wrong.'
+            })
+        }
+    }
 }
