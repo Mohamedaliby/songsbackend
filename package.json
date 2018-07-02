@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/app.js"
+    "start": "nodemon ./src/app.js",
+    "seed": "node seed"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -23,7 +24,7 @@
     "socket.io": "^2.1.0",
     "socketio-jwt": "^4.5.0",
     "sqlite": "^2.9.2",
-    "sqlite3": "^3.1.13"
+    "sqlite3": "^3.1.8"
   },
   "author": "",
   "license": "ISC"
