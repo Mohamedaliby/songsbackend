@@ -3,7 +3,7 @@ const {
   Song,
   User,
   Bookmark,
-  History
+  Histories
 } = require('../src/models')
 
 const Promise = require('bluebird')
@@ -32,9 +32,9 @@ sequelize.sync({force: true})
       })
     )
 
-    // await Promise.all(
-    //   histories.map(history => {
-    //     History.create(history)
-    //   })
-    // )
+    await Promise.all(
+      histories.map(history => {
+        Histories.create(history)
+      })
+    )
   })

@@ -56,6 +56,7 @@ socketio.on('connect', (socket)=>{
 })
 
 require('./routes')(app)
+require('./passport')
 
 sequelize.sync()
     .then(() => {
