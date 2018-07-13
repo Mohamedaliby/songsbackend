@@ -15,13 +15,6 @@ const config = {
     },
     authentication: {
         jwtSecret: process.env.JWT_SECRET
-    },
-    heroku: {
-        dialect:  'postgres',
-        protocol: 'postgres',
-        port:     match[4],
-        host:     match[3],
-        logging:  true //false
     }
 }
 module.exports = config;
