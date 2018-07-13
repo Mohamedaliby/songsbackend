@@ -8,12 +8,14 @@
     "seed": "node seed"
   },
   "dependencies": {
+    "@google-cloud/storage": "^1.7.0",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.1",
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.15.4",
+    "firebase": "^5.2.0",
     "joi": "^10.6.0",
     "jsonwebtoken": "^8.0.0",
     "morgan": "^1.8.2",
