@@ -62,7 +62,7 @@ sequelize.sync()
     .then(() => {
         app.get('server').listen(process.env.PORT || config.port)
         // server.listen(process.env.PORT || config.port)
-        console.log(`lestining on port ${config.port}`)
+        console.log(`listening on port ${config.port}`)
     })
     
     
