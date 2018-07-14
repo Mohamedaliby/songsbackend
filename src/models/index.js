@@ -13,6 +13,13 @@ if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
       host:     match[3],
       logging:  true //false
     }) 
+    const models = {
+        Bookmark: sequelize.import('./Bookmark'),
+        History: sequelize.import('./History'),
+        message: sequelize.import('./message'),
+        Song: sequelize.import('./Song'),
+        User: sequelize.import('./User'),
+      };
 }
 else {
         var sequelize = new Sequelize(
