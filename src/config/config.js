@@ -1,12 +1,14 @@
 const path = require('path')
 const dotenv = require('dotenv')
 
-
+if (dotenv.config()) {
 const result = dotenv.config()
 
 if (result.error) {
  throw result.error
 }
+}
+
 const config = {
     port: process.env.PORT || 3000,
     db: {
