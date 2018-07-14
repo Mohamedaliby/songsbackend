@@ -10,7 +10,7 @@ const path = require('path')
 // }
 
 const config = {
-    port: process.env.PORT || 3000,
+    port: 3000,
     db: {
         database: process.env.DATABASE_URL ,
         user: process.env.DB_USER,
