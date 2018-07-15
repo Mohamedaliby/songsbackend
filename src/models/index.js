@@ -3,7 +3,7 @@ const path = require('path')
 const Sequelize = require('sequelize')
 const config = require('../config/config')
 const db = {}
-
+const Op = Sequelize.Op
 // if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
     // the application is executed on Heroku ... use the postgres database
     // var sequelize = new Sequelize(config.db.database,
@@ -29,7 +29,17 @@ const db = {}
                 {
                     dialect:  'postgres',
                     protocol: 'postgres',
-                    logging:  true //false
+                    logging:  true, //false,
+                    freezeTableName: true,
+                    operatorsAliases: {
+                      $and: Op.and,
+                      $or: Op.or,
+                      $eq: Op.eq,
+                      $gt: Op.gt,
+                      $lt: Op.lt,
+                      $lte: Op.lte,
+                      $like: Op.like
+                    }
                 }
         )
 
