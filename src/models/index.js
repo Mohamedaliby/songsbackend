@@ -21,34 +21,36 @@ const Op = Sequelize.Op
     //   };
 // }
 // else {
-        var sequelize = new Sequelize(
-            config.heroku.database,
-            config.heroku.user,
-            config.heroku.password,
-            config.heroku.options,
-            config.heroku.options.operatorsAliases = {
-                $and: Op.and,
-                $or: Op.or,
-                $eq: Op.eq,
-                $gt: Op.gt,
-                $lt: Op.lt,
-                $lte: Op.lte,
-                $like: Op.like
-              },
-                // {
-                //     dialect:  'postgres',
-                //     protocol: 'postgres',
-                //     operatorsAliases: {
-                //       $and: Op.and,
-                //       $or: Op.or,
-                //       $eq: Op.eq,
-                //       $gt: Op.gt,
-                //       $lt: Op.lt,
-                //       $lte: Op.lte,
-                //       $like: Op.like
-                //     }
-                // }
-        )
+        // var sequelize = new Sequelize(
+        //     config.heroku.database,
+        //     config.heroku.user,
+        //     config.heroku.password,
+        //     config.heroku.options,
+        //     config.heroku.options.operatorsAliases = {
+        //         $and: Op.and,
+        //         $or: Op.or,
+        //         $eq: Op.eq,
+        //         $gt: Op.gt,
+        //         $lt: Op.lt,
+        //         $lte: Op.lte,
+        //         $like: Op.like
+        //       },
+        //         // {
+        //         //     dialect:  'postgres',
+        //         //     protocol: 'postgres',
+        //         //     operatorsAliases: {
+        //         //       $and: Op.and,
+        //         //       $or: Op.or,
+        //         //       $eq: Op.eq,
+        //         //       $gt: Op.gt,
+        //         //       $lt: Op.lt,
+        //         //       $lte: Op.lte,
+        //         //       $like: Op.like
+        //         //     }
+        //         // }
+        // )
+
+const sequelize = new Sequelize('postgres://xnambhdaayebef:127b17f798408d13da8222133c77e5895e481d69c207f9cda14c930a4d83784b@ec2-54-225-103-255.compute-1.amazonaws.com:5432/d3uoq91r3cvaq2');
             const models = {
         Bookmark: sequelize.import('./Bookmark'),
         History: sequelize.import('./History'),
