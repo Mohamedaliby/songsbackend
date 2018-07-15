@@ -22,26 +22,40 @@ const Op = Sequelize.Op
 // }
 // else {
         var sequelize = new Sequelize(
-            config.db.database,
-            config.db.user,
-            config.db.password,
-            // config.db.options
-                {
-                    dialect:  'postgres',
-                    protocol: 'postgres',
-                    logging:  true, //false,
-                    freezeTableName: true,
-                    operatorsAliases: {
-                      $and: Op.and,
-                      $or: Op.or,
-                      $eq: Op.eq,
-                      $gt: Op.gt,
-                      $lt: Op.lt,
-                      $lte: Op.lte,
-                      $like: Op.like
-                    }
-                }
+            config.heroku.database,
+            config.heroku.user,
+            config.heroku.password,
+            config.heroku.options,
+            config.heroku.options.operatorsAliases = {
+                $and: Op.and,
+                $or: Op.or,
+                $eq: Op.eq,
+                $gt: Op.gt,
+                $lt: Op.lt,
+                $lte: Op.lte,
+                $like: Op.like
+              },
+                // {
+                //     dialect:  'postgres',
+                //     protocol: 'postgres',
+                //     operatorsAliases: {
+                //       $and: Op.and,
+                //       $or: Op.or,
+                //       $eq: Op.eq,
+                //       $gt: Op.gt,
+                //       $lt: Op.lt,
+                //       $lte: Op.lte,
+                //       $like: Op.like
+                //     }
+                // }
         )
+            const models = {
+        Bookmark: sequelize.import('./Bookmark'),
+        History: sequelize.import('./History'),
+        message: sequelize.import('./message'),
+        Song: sequelize.import('./Song'),
+        User: sequelize.import('./User'),
+      };
 
         
 fs
