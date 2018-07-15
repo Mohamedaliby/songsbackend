@@ -25,7 +25,12 @@ const db = {}
             config.db.database,
             config.db.user,
             config.db.password,
-            config.db.options
+            // config.db.options
+                {
+                    dialect:  'postgres',
+                    protocol: 'postgres',
+                    logging:  true //false
+                }
         )
 
         
