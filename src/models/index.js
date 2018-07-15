@@ -7,10 +7,12 @@ const db = {}
 // if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
     // the application is executed on Heroku ... use the postgres database
     var sequelize = new Sequelize(process.env.HEROKU_POSTGRESQL_BRONZE_URL, {
+      user: 'xnambhdaayebef',
+      password: '127b17f798408d13da8222133c77e5895e481d69c207f9cda14c930a4d83784b',
       dialect:  'postgres',
       protocol: 'postgres',
-      port:     match[4],
-      host:     match[3],
+      port:     5432,
+      host:    'ec2-54-225-103-255.compute-1.amazonaws.com',
       logging:  true //false
     }) 
     const models = {
