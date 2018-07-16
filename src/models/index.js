@@ -50,14 +50,27 @@ const Op = Sequelize.Op
         //         // }
         // )
 
-const sequelize = new Sequelize('postgres://xnambhdaayebef:127b17f798408d13da8222133c77e5895e481d69c207f9cda14c930a4d83784b@ec2-54-225-103-255.compute-1.amazonaws.com:5432/d3uoq91r3cvaq2');
-            const models = {
-        Bookmark: sequelize.import('./Bookmark'),
-        History: sequelize.import('./History'),
-        message: sequelize.import('./message'),
-        Song: sequelize.import('./Song'),
-        User: sequelize.import('./User'),
-      };
+const sequelize = new Sequelize('postgres://xnambhdaayebef:127b17f798408d13da8222133c77e5895e481d69c207f9cda14c930a4d83784b@ec2-54-225-103-255.compute-1.amazonaws.com:5432/d3uoq91r3cvaq2',
+               {
+                    dialect:  'postgres',
+                    protocol: 'postgres',
+                    operatorsAliases: {
+                      $and: Op.and,
+                      $or: Op.or,
+                      $eq: Op.eq,
+                      $gt: Op.gt,
+                      $lt: Op.lt,
+                      $lte: Op.lte,
+                      $like: Op.like
+                    }
+                })
+    //      const models = {
+    //     Bookmark: sequelize.import('./Bookmark.js'),
+    //     History: sequelize.import('./History.js'),
+    //     message: sequelize.import('./message.js'),
+    //     Song: sequelize.import('./Song.js'),
+    //     User: sequelize.import('./User.js'),
+    //   };
 
         
 fs
