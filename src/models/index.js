@@ -72,7 +72,14 @@ const sequelize = new Sequelize('postgres://xnambhdaayebef:127b17f798408d13da822
     //     User: sequelize.import('./User.js'),
     //   };
 
-        
+    sequelize
+    .authenticate()
+    .then(() => {
+      console.log('Connection to database has been established successfully.');
+    })
+    .catch(err => {
+      console.error('Unable to connect to the database:', err);
+    })
 fs
 .readdirSync(__dirname)
 .filter((file) =>
