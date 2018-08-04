@@ -9,13 +9,20 @@ cloudinary.config({
 })
 
 
-
+let imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+}
 
 module.exports.memoryUpload = multer({ //multer settings
     storage: memory,
     limits: {
         fileSize: 2 * 1024 * 1024 // no larger than 2mb
-    }
+    },
+    fileFilter: imageFilter
 }).single('file')
 
 module.exports.upload = (file) => {
