@@ -26,7 +26,27 @@ module.exports = (app) => {
 
         // Songs
         app.get('/songs', SongsController.index)
-        app.post('/songs', isAuthenticated, image.upload, SongsController.post)
+        // app.post('/songs', isAuthenticated, image.upload, SongsController.post)
+
+        app.post('/songs', image.memoryUpload, SongsController.post)
+        // app.post('/songs', image.memoryUpload, (req, res) => {
+        //         console.log('Upload Image')
+        //         let file = req.file;
+        //         console.log(file)
+
+        //         if (file) {
+        //           image.upload(file).then((success) => {
+        //             res.status(200).send({
+        //               status: 'success'
+        //             })
+        //           }).catch((error) => {
+        //                 res.status(504).json({
+        //                         error: error
+        //                       })
+        //             console.error(error);
+        //           })
+        //         }
+        //       })
         app.get('/songs/:id', SongsController.show)
         app.put('/songs/:id', image.upload, SongsController.put)
         app.delete('/songs/:id', SongsController.delete)
