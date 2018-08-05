@@ -8,7 +8,7 @@ const Op = Sequelize.Op
 
 
 if (process.env.NODE_ENV == 'production') {
-    const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    var sequelize = new Sequelize(process.env.DATABASE_URL, {
         dialect: 'postgres',
         protocol: 'postgres',
         operatorsAliases: {
@@ -39,36 +39,14 @@ if (process.env.NODE_ENV == 'production') {
         })
 
 }
-// else {
-// var sequelize = new Sequelize(
-//     config.heroku.database,
-//     config.heroku.user,
-//     config.heroku.password,
-//     config.heroku.options,
-//     config.heroku.options.operatorsAliases = {
-//         $and: Op.and,
-//         $or: Op.or,
-//         $eq: Op.eq,
-//         $gt: Op.gt,
-//         $lt: Op.lt,
-//         $lte: Op.lte,
-//         $like: Op.like
-//       },
-//         // {
-//         //     dialect:  'postgres',
-//         //     protocol: 'postgres',
-//         //     operatorsAliases: {
-//         //       $and: Op.and,
-//         //       $or: Op.or,
-//         //       $eq: Op.eq,
-//         //       $gt: Op.gt,
-//         //       $lt: Op.lt,
-//         //       $lte: Op.lte,
-//         //       $like: Op.like
-//         //     }
-//         // }
-// )
-
+else {
+var sequelize = new Sequelize(
+    config.db.database,
+    config.db.user,
+    config.db.password,
+    config.db.options,
+)
+}
 fs
     .readdirSync(__dirname)
     .filter((file) =>
